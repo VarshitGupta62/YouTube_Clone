@@ -7,6 +7,9 @@ import Playlist from "./Playlist";
 import Like from "./Like";
 import Create from "./Create";
 import CustomizeChannel from "./CustomizeChannel";
+import Login from "./Login";
+import Signup from "./Signup";
+import Settings from "./Settings";
 
 
 export {
@@ -19,6 +22,9 @@ export {
     Playlist,
     Like,
     Create,
-    CustomizeChannel
+    CustomizeChannel,
+    Login,
+    Signup,
+    Settings
 
 };
