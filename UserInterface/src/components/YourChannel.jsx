@@ -26,7 +26,7 @@ function YourChannel() {
             <img class="w-25 h-25 rounded-full" src={logo} alt="not found"/>
             <div class="font-bold dark:text-black">
                 <div className='text-lg' >Varshit Gupta</div>
-                <div class="text-sm mb-3 text-gray-500  ">Joined in August 2014</div>
+                <div class="text-sm mb-3 text-gray-500  ">Joined in May 2024</div>
                 <Link to={"/customize_channel"}>
                 <button type="button" className=" text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-2.5 py-2.5 me-2 ">Customize channel</button>
                 </Link>

@@ -10,6 +10,7 @@ import CustomizeChannel from "./CustomizeChannel";
 import Login from "./Login";
 import Signup from "./Signup";
 import Settings from "./Settings";
+import Shorts from "./Shorts";
 
 
 export {
@@ -25,6 +26,7 @@ export {
     CustomizeChannel,
     Login,
     Signup,
-    Settings
+    Settings,
+    Shorts
 
 };

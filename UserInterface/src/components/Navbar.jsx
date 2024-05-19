@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 import logo from '../assets/YouTube_Logo_2017.svg.png';
+import { Link } from 'react-router-dom';
 
 function Navbar({ openChange }) {
   const toggleSidebar = () => {
@@ -101,32 +102,27 @@ function Navbar({ openChange }) {
                 <div className="absolute right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg" id="dropdown-2">
                   <div className="px-4 py-3" role="none">
                     <p className="text-sm text-gray-900" role="none">
-                      Neil Sims
+                      Varshit Gupta
                     </p>
                     <p className="text-sm font-medium text-gray-900 truncate" role="none">
-                      neil.sims@flowbite.com
+                       varshitgupta45@gmail.com
                     </p>
                   </div>
                   <ul className="py-1" role="none">
                     <li>
-                      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                      <Link to={"/your_channel"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                         Dashboard
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                      <Link to={"/settings"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                         Settings
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                      <Link to={"/login"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                         Sign out
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

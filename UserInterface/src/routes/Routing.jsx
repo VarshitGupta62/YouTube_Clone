@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter , Routes , Route  } from 'react-router-dom'
 import App from '../App'
-import { Home , YourChannel , History , Playlist , Like , CustomizeChannel , Signup , Login , Settings } from '../components'
+import { Home , YourChannel , History , Playlist , Like , CustomizeChannel , Signup , Login , Settings , Shorts} from '../components'
 
 function Routing() {
   return (
@@ -17,6 +17,7 @@ function Routing() {
             <Route path='/subscriptions' element={<Home/>} ></Route>
             <Route path='/customize_channel' element={<CustomizeChannel/>} ></Route>
             <Route path='/settings' element={<Settings/>} ></Route>
+            <Route path='/shorts' element={<Shorts/>} ></Route>
         </Route> 
             <Route path='/login' element={<Login/>} ></Route>
             <Route path='/signup' element={<Signup/>} ></Route>
