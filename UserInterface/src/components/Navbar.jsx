@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 import logo from '../assets/YouTube_Logo_2017.svg.png';
+import logo2 from '../assets/profile-picture-5.jpg';
 import { Link } from 'react-router-dom';
 
 function Navbar({ openChange }) {
@@ -94,7 +95,7 @@ function Navbar({ openChange }) {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-8 h-8 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  src={logo2}
                   alt="User"
                 />
               </button>

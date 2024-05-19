@@ -2,6 +2,7 @@ import  {Link} from 'react-router-dom'
 import React from 'react'
 import logo from '../assets/asset-6.jpg'
 import logo2 from '../assets/image-1@2x.jpg'
+import image from "../assets/F0ZWYHTI8ZQZ55Q.webp"
 
 function Home() {
   return (
@@ -16,17 +17,17 @@ function Home() {
               {/* ------------video------------ */}
                 <div>
                     <div className="relative">
-                    <Link to={"/"}>
-                      <img src={logo2} alt="Image Not Found" className="w-full h-auto"/>
+                    <Link to={"/watch"}>
+                      <img src={image} alt="Image Not Found" className="w-full h-auto"/>
                     </Link>
                     </div>
                     <div className="mt-2 md:mt-0">
                         <div>
-                            <h3 className="text-lg font-bold"><Link to="single-movie.html">The warrior life</Link></h3>
+                            <h3 className="text-lg font-bold"><Link to={"/watch"}>JARVIS - Marvel's Iron Man 3 Second Screen Experience - Trailer</Link></h3>
                         </div>
                         <div className="mt-2">
                             <ul>
-                                <li className="text-sm">2hr 00mins</li>
+                                <li className="text-sm"> 00mins : 16sec</li>
                             </ul>
                         </div>
                     </div>

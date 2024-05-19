@@ -11,6 +11,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Settings from "./Settings";
 import Shorts from "./Shorts";
+import Video from "./Video";
 
 
 export {
@@ -27,6 +28,7 @@ export {
     Login,
     Signup,
     Settings,
-    Shorts
+    Shorts,
+    Video
 
 };
