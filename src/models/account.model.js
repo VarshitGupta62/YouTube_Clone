@@ -5,19 +5,31 @@ const userSignUp = new Schema(
     {
         name:{
             type:String,
-            requiered:true
+            requiered:true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+            index: true
 
         },
         email:{
             type:String,
-            requiered:true
+            requiered:true,
+            unique: true,
+            lowercase: true,
+            trim: true 
 
         },
         password:{
             type:String,
             requiered:true
+        },
+        refreshToken:{
+            type:String
         }
-
+    },
+    {
+        timestamps:true
     }
 )
 
