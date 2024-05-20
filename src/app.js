@@ -16,7 +16,9 @@ app.use(cookieParser())
 
 
 //routes import
-import userRouter from './routes/user.routes.js'
+import userAccount from './routes/account.routes.js'
+
+// import userRouter from './routes/user.routes.js'
 // import healthcheckRouter from "./routes/healthcheck.routes.js"
 // import tweetRouter from "./routes/tweet.routes.js"
 // import subscriptionRouter from "./routes/subscription.routes.js"
@@ -27,8 +29,14 @@ import userRouter from './routes/user.routes.js'
 // import dashboardRouter from "./routes/dashboard.routes.js"
 
 //routes declaration
+// ---------------- path-------------------
+// http://localhost:8000/api/v1/account/signup
+// ------------------------------------------
+
+app.use("/api/v1/account", userAccount)
+
 // app.use("/api/v1/healthcheck", healthcheckRouter)
-app.use("/api/v1/users", userRouter)
+// app.use("/api/v1/users", userRouter)
 // app.use("/api/v1/tweets", tweetRouter)
 // app.use("/api/v1/subscriptions", subscriptionRouter)
 // app.use("/api/v1/videos", videoRouter)
