@@ -49,12 +49,27 @@ const login  = asyncHandler(async (req , res) => {
         throw new ApiError(400, "All fields are required");
     }
 
+    const userfind = await newUser.findOne({ email })
+
+    if ( !userfind ) {
+
+        throw new ApiError(404 , "User does not exist")
+        
+    }
+
+    const isPasswordValid = await userfind.isPasswordCorrect(password)
+
+    if(!isPasswordValid){
+        throw new ApiError(400 , "Invalid password")
+    }
+
 
     return res
     .status(200)
     .json(
         new ApiResponse(
             200, 
+            userfind,
             "User logged In Successfully"
         )
     )

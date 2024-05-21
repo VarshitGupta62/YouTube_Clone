@@ -34,4 +34,11 @@ const userSignUp = new Schema(
 )
 
 
+// Method to compare the entered password with the stored password
+userSignUp.methods.isPasswordCorrect = async function (password) {
+    // In a real application, you should hash the input password and compare it to the stored hashed password
+    return this.password === password;
+};
+
+
 export const newUser = mongoose.model("newUser" , userSignUp)

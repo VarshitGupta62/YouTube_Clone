@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import logo from "../assets/download (1).png";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
+    const history = useNavigate();
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -21,9 +25,11 @@ function Signup() {
             console.log('Signup successful:', response.data);
             setSuccessMessage('Signup successful!'); // Set success message
             // Optionally, you can reset the form fields after successful signup
+            alert("Signup successful!")
             setName('');
             setEmail('');
             setPassword('');
+            history("/login")
         } catch (error) {
             console.error('Signup error:', error.response.data);
             setError(error.response.data.message || 'An error occurred.');
