@@ -7,10 +7,8 @@ const userSignUp = new Schema(
             type:String,
             requiered:true,
             unique: true,
-            lowercase: true,
             trim: true,
             index: true
-
         },
         email:{
             type:String,
@@ -18,13 +16,12 @@ const userSignUp = new Schema(
             unique: true,
             lowercase: true,
             trim: true 
-
         },
         password:{
             type:String,
             requiered:true
         },
-        refreshToken:{
+        avatar:{
             type:String
         }
     },

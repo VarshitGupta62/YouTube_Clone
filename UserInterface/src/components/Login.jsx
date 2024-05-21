@@ -31,7 +31,7 @@ function  Login({setUser}) {
         } catch (error) {
 
             console.log('Signup error : ', error);
-            alert("login failed");
+            alert(" Login failed !");
             
         }
     }

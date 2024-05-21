@@ -8,7 +8,7 @@ import { ApiError } from "../utils/ApiError.js";
 const registerUser =  asyncHandler( async (req , res) =>{
 
     const { name , email, password } = req.body
-    console.log(name);
+    // console.log(name);
     // console.log(req.headers);
 
     if (!name || !email || !password) {
@@ -43,7 +43,7 @@ const registerUser =  asyncHandler( async (req , res) =>{
 const login  = asyncHandler(async (req , res) => {
     
     const {email , password } = req.body
-    console.log(email);
+    // console.log(email);
 
     if ( !email || !password) {
         throw new ApiError(400, "All fields are required");
@@ -76,7 +76,49 @@ const login  = asyncHandler(async (req , res) => {
 })
 // {------------------------ login user---------------------------}
 
+// {**********-------------------Update user-------------------**********}
+  const updateAccount = asyncHandler(async(req , res) => {
+
+    const {name , email , password} = req.body
+
+    if (! name|| !email || !password) {
+        throw new ApiError(400, "All fields are required")
+    }
+
+    // const avatarLocalPath = req.file?.path
+
+    // if (!avatarLocalPath) {
+    //     throw new ApiError(400, "Avatar file is missing")
+    // }
+    // const userid = '664c3ade2c624bffac004f16'
+
+    const user = await newUser.findByIdAndUpdate(
+         // Use authenticated user's ID
+         req.params.id,
+        {
+          $set: {
+            name: name,
+            email: email,
+            password: password
+          }
+        },
+        { new: true }
+      );
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Account details updated successfully"))
+
+
+    
+
+  })
+
+
+// {-----------------------------Update user-----------------------------}
+
 export {
     registerUser,
-    login
+    login,
+    updateAccount
 }
