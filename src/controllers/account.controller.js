@@ -3,6 +3,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 
+// {******------------------------ register user---------------------------******}
+
 const registerUser =  asyncHandler( async (req , res) =>{
      
 
@@ -24,21 +26,30 @@ const registerUser =  asyncHandler( async (req , res) =>{
         // return res.status(400).json({message: "User already exists" , data: null})
         throw new ApiError(409, "User with email or username already exists")
     }
-
     
-     
-
     const user = await newUser.create({
-         name ,
-         email , 
-         password
+        name ,
+        email , 
+        password
     })
     // console.log(user);
-
+    
     return res.status(201).json(new ApiResponse(200 , user ,"User created successfully"))
-
+    
 }) 
+// {------------------------ register user---------------------------}
+
+// {*****------------------------ login user---------------------------******}
+
+const login  = asyncHandler(async (req , res) => {
+    
+    const {name , email , password } = req.body
+    console.log(name);
+    
+})
+// {------------------------ login user---------------------------}
 
 export {
-    registerUser
+    registerUser,
+    login
 }
