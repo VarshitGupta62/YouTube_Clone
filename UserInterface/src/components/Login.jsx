@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function  Login() {
+function  Login({setUser}) {
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
 
@@ -21,8 +21,10 @@ function  Login() {
             })
 
             console.log('login successful:', res.data);
+            setUser(res.data);
+            console.log(res.data);
             alert("login successful");
-            history('/shorts');
+            history('/your_channel');
 
 
             

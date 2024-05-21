@@ -3,7 +3,16 @@ import React  from 'react'
 import logo from "../assets/profile-picture-5.jpg";
 import { Link } from "react-router-dom";
 
-function YourChannel() {
+function YourChannel({userdata}) {
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options);
+  };
+
+  // console.log(formatDate);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleToggleModal = () => {
@@ -15,6 +24,8 @@ function YourChannel() {
     // Handle form submission logic here
     console.log("Form submitted");
   };
+
+  console.log(userdata);
   return (
     <>
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4  ">
@@ -25,8 +36,8 @@ function YourChannel() {
         <div class="mt-4 flex items-center gap-5">
             <img class="w-25 h-25 rounded-full" src={logo} alt="not found"/>
             <div class="font-bold dark:text-black">
-                <div className='text-lg' >Varshit Gupta</div>
-                <div class="text-sm mb-3 text-gray-500  ">Joined in May 2024</div>
+                <div className='text-lg' >{(userdata.name || "Admin").toUpperCase()}</div>
+                <div class="text-sm mb-3 text-gray-500  ">Joined in {formatDate(userdata.createdAt)}</div>
                 <Link to={"/customize_channel"}>
                 <button type="button" className=" text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-2.5 py-2.5 me-2 ">Customize channel</button>
                 </Link>
