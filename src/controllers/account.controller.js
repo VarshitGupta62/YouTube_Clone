@@ -6,7 +6,6 @@ import { ApiError } from "../utils/ApiError.js";
 // {******------------------------ register user---------------------------******}
 
 const registerUser =  asyncHandler( async (req , res) =>{
-     
 
     const { name , email, password } = req.body
     console.log(name);
@@ -43,9 +42,22 @@ const registerUser =  asyncHandler( async (req , res) =>{
 
 const login  = asyncHandler(async (req , res) => {
     
-    const {name , email , password } = req.body
-    console.log(name);
-    
+    const {email , password } = req.body
+    console.log(email);
+
+    if ( !email || !password) {
+        throw new ApiError(400, "All fields are required");
+    }
+
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200, 
+            "User logged In Successfully"
+        )
+    )
 })
 // {------------------------ login user---------------------------}
 
