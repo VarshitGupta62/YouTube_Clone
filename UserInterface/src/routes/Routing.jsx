@@ -20,7 +20,7 @@ function Routing() {
           <Route path='/like' element={isAuthenticated() ? <Like /> : <Navigate to='/login' />} />
           <Route path='/subscriptions' element={<Home />} />
           <Route path='/customize_channel' element={isAuthenticated() ? <CustomizeChannel userdata={user.data}/> : <Navigate to='/login' />} />
-          <Route path='/settings' element={isAuthenticated() ? <Settings /> : <Navigate to='/login' />} />
+          <Route path='/settings' element={isAuthenticated() ? <Settings userdata={user.data} /> : <Navigate to='/login' />} />
           <Route path='/shorts' element={isAuthenticated() ? <Shorts /> : <Navigate to='/login' />} />
           <Route path='/watch' element={<Video />} />
         </Route>

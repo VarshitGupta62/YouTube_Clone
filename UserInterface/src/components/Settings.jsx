@@ -1,8 +1,35 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import img from "../assets/gde-najti-ssylku-na-svoj-kanal-youtube.jpg"
+import axios from 'axios'
 
-function Settings() {
+function Settings({userdata}) {
+
+    const history = useNavigate()
+
+    const handleDeleteClick = () =>{
+         
+        const  value = confirm("Are you sure ?");
+
+        if (value) {
+
+            
+            try {
+
+                const res = axios.delete(`/api/v1/account/delete/${userdata._id}`)
+
+                alert("Your channel is deleted !");
+                history("/signup");
+                
+            } catch (error) {
+
+                console.log(error);
+                alert(error);
+                
+            }
+            
+        }  
+    }
   return (
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4  ">
      <div className="mb-4 col-span-full xl:mb-2"> 
@@ -33,7 +60,7 @@ function Settings() {
                         Delete channel
                         </th>
                         <td class="px-6 py-4">
-                            <Link to={"/"} class="font-medium text-blue-600   hover:underline">Delete</Link>
+                        <button onClick={handleDeleteClick} className="font-medium text-blue-600 hover:underline">Delete</button>
                         </td>
                     </tr>
                     

@@ -109,16 +109,38 @@ const login  = asyncHandler(async (req , res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated successfully"))
 
-
-    
-
   })
 
 
 // {-----------------------------Update user-----------------------------}
 
+
+
+// {----------------------------Delete user-------------------------------}
+
+const deleteAccount = asyncHandler( async (req , res) => {
+
+    const user = await newUser.findByIdAndDelete(req.params.id)
+
+    if (!user) {
+        throw new ApiError(404, "User not found")
+    }
+
+    res.status(200).json({
+        success: true,
+        message: "Account deleted successfully"
+    });
+        
+})
+
+
+
+// {----------------------------Delete user-------------------------------}
+
+
 export {
     registerUser,
     login,
-    updateAccount
+    updateAccount,
+    deleteAccount
 }
