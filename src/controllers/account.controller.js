@@ -96,7 +96,7 @@ const login  = asyncHandler(async (req , res) => {
     let avatarName;
     if (req.file) {
         avatarLocalPath = req.file ? req.file.path : null; // Path to the uploaded file
-        avatarName = await uploadOnCloudinary(avatarLocalPath)
+        avatarName  = await uploadOnCloudinary(avatarLocalPath)
     }
 
 

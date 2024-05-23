@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function CustomizeChannel({ userdata }) {
   const history = useNavigate();
 
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(userdata.avatar);
   const [name, setName] = useState(userdata.name.toUpperCase());
   const [email, setEmail] = useState(userdata.email);
   const [password, setPassword] = useState(userdata.password);
@@ -72,7 +72,7 @@ function CustomizeChannel({ userdata }) {
 
           <label htmlFor="avatar" className="block mb-1 text-sm font-medium text-gray-900">Avatar</label>
           <p id="helper-text-explanation" className="mb-3 text-sm text-gray-500">Choose an avatar image.</p>
-          <input type="file" name='avatar' id="avatar"  onChange={handleFileChange} className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+          <input type="file" name='avatar' id="avatar"  onChange={handleFileChange} className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required/>
 
           <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900">Password</label>
           <p id="helper-text-explanation" className="mb-3 text-sm text-gray-500">Enter your password.</p>
