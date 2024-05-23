@@ -1,6 +1,5 @@
 import { useState } from "react";
 import React  from 'react'
-import logo from "../assets/profile-picture-5.jpg";
 import { Link } from "react-router-dom";
 
 function YourChannel({userdata}) {
@@ -34,7 +33,7 @@ function YourChannel({userdata}) {
         <div className='mb-4' >YourChannel</div>
         <hr />
         <div class="mt-4 flex items-center gap-5">
-            <img class="w-25 h-25 rounded-full" src={logo} alt="not found"/>
+            <img class="w-28 h-28 rounded-full" src={userdata.avatar} alt="not found"/>
             <div class="font-bold dark:text-black">
                 <div className='text-lg' >{(userdata.name || "Admin").toUpperCase()}</div>
                 <div class="text-sm mb-3 text-gray-500  ">Joined in {formatDate(userdata.createdAt)}</div>

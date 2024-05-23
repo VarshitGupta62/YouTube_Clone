@@ -2,6 +2,8 @@ import { newUser } from "../models/account.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+
 
 // {******------------------------ register user---------------------------******}
 
@@ -25,11 +27,14 @@ const registerUser =  asyncHandler( async (req , res) =>{
         // return res.status(400).json({message: "User already exists" , data: null})
         throw new ApiError(409, "User with email or username already exists")
     }
+
+    const avatar="https://res.cloudinary.com/drr9bsrar/image/upload/v1716446716/ov9ltesqzbscwy3njtmy.jpg"
     
     const user = await newUser.create({
         name ,
         email , 
-        password
+        password,
+        avatar
     })
     // console.log(user);
     
@@ -80,30 +85,33 @@ const login  = asyncHandler(async (req , res) => {
   const updateAccount = asyncHandler(async(req , res) => {
 
     const {name , email , password} = req.body
+    console.log(name);
 
     if (! name|| !email || !password) {
         throw new ApiError(400, "All fields are required")
     }
 
-    // const avatarLocalPath = req.file?.path
+    // console.log(req.files);
+    let avatarLocalPath;
+    let avatarName;
+    if (req.file) {
+        avatarLocalPath = req.file ? req.file.path : null; // Path to the uploaded file
+        avatarName = await uploadOnCloudinary(avatarLocalPath)
+    }
 
-    // if (!avatarLocalPath) {
-    //     throw new ApiError(400, "Avatar file is missing")
-    // }
-    // const userid = '664c3ade2c624bffac004f16'
 
     const user = await newUser.findByIdAndUpdate(
-         // Use authenticated user's ID
-         req.params.id,
+        req.params.id,
         {
-          $set: {
-            name: name,
-            email: email,
-            password: password
-          }
+            $set: {
+                name: name,
+                email: email,
+                password: password,
+                avatar: avatarName.url // Save the avatar path to the database
+            }
         },
         { new: true }
-      );
+    );
 
     return res
     .status(200)
