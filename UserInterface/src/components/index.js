@@ -12,6 +12,8 @@ import Signup from "./Signup";
 import Settings from "./Settings";
 import Shorts from "./Shorts";
 import Video from "./Video";
+import UploadVideo from "./UploadVideo";
+import Dasboard from "./Dasboard";
 
 
 export {
@@ -29,6 +31,9 @@ export {
     Signup,
     Settings,
     Shorts,
-    Video
+    Video,
+    UploadVideo,
+    Dasboard
+
 
 };
