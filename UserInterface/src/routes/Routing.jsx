@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import App from '../App'
-import { Home, YourChannel, History, Playlist, Like, CustomizeChannel, Signup, Login, Settings, Shorts, Video, UploadVideo , Dasboard } from '../components'
+import { Home, YourChannel, History, Playlist, Like, CustomizeChannel, Signup, Login, Settings, Shorts, Video, UploadVideo , AllVideo } from '../components'
 
 function Routing() {
   const [user, setUser] = useState(null);
@@ -16,7 +16,7 @@ function Routing() {
           <Route index element={<Home />} />
 
           <Route path='your_channel/*' element={isAuthenticated() ? <YourChannel userdata={user.data} /> : <Navigate to='/login' />}>
-            <Route path='dasboard' element={< Dasboard />} />
+            <Route path='all_video' element={< AllVideo />} />
             <Route path='upload_video' element={< UploadVideo />} />
           </Route>
 

@@ -13,7 +13,7 @@ import Settings from "./Settings";
 import Shorts from "./Shorts";
 import Video from "./Video";
 import UploadVideo from "./UploadVideo";
-import Dasboard from "./Dasboard";
+import AllVideo from "./AllVideo";
 
 
 export {
@@ -33,7 +33,7 @@ export {
     Shorts,
     Video,
     UploadVideo,
-    Dasboard
+    AllVideo
 
 
 };

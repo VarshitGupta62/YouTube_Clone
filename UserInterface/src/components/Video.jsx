@@ -7,7 +7,7 @@ function Video() {
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4">
       <div className="mb-4 col-span-full xl:mb-2">
         {/*-------------------content---------------------*/}
-        <div>Video</div>
+        {/* <div>Video</div> */}
         <section className="pb-5 mt-3">
           <div className="container mx-auto">
             <div className="row">
