@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { useState } from "react";
 
@@ -19,12 +20,26 @@ function UploadVideo() {
       setTime({ ...time, [name]: value });
     }
   };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
         const formData = {
           title: title,
           description: description,
+        }
+        try {
+
+          const res = await axios.post("/api/v1/videos/publish", formData)
+
+          alert("Successfully upload");
+          console.log(res.data);
+
+          
+        } catch (error) {
+
+          console.log("Video Upload error : ", error);
+          alert(error);
+          
         }
         console.log("Form  data" , formData);
       };

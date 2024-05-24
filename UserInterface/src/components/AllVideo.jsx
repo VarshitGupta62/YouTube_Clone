@@ -1,8 +1,9 @@
 import  {Link} from 'react-router-dom'
 import React from 'react'
 import logo from '../assets/asset-6.jpg'
-import logo2 from '../assets/image-1@2x.jpg'
+// import logo2 from '../assets/image-1@2x.jpg'
 import image from "../assets/F0ZWYHTI8ZQZ55Q.webp"
+
 
 function AllVideo() {
   return (
