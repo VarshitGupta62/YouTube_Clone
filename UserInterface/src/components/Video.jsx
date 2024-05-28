@@ -36,18 +36,9 @@ function Video() {
                         />
                         <div class="ml-2 mb-1">
                           <ul class="flex flex-row items-center space-x-2 text-sm font-medium text-gray-500">
-                            <li className='hidden sm:block '>
+                            <li className=' '>
                               <a class="inline-flex px-4 py-3" href="#">
                                 Varshit Gupta
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                href="#"
-                                class="inline-flex px-4 py-3 bg-gray-700 text-white hover:bg-black rounded-lg active"
-                                aria-current="page"
-                              >
-                                Subscribe 112
                               </a>
                             </li>
                             <li>
@@ -71,7 +62,7 @@ function Video() {
                                 </svg>11
                               </a>
                             </li>
-                            <li className='hidden sm:block'>
+                            <li className=''>
                               <a
                                 href="#"
                                 class="inline-flex px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100"
