@@ -4,215 +4,158 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
-const generateAccessAndRefereshTokens = async(userId) => {
-
+const generateAccessAndRefreshTokens = async (userId) => {
     try {
+        const user = await newUser.findById(userId);
+        const accessToken = user.generateAccessToken();
+        const refreshToken = user.generateRefreshToken();
 
-        const user = await user.findbyId(userId)
-        const accessToken = user.generateAccessToken
-        const refresehToken = user.generateRefreshToken
+        user.refreshToken = refreshToken;
+        await user.save({ validateBeforeSave: false });
 
-        user.refresehToken = refresehToken
-        await user.save({validateBeforeSave: false})
-
-        return {accessToken , refresehToken}
-
+        return { accessToken, refreshToken };
     } catch (error) {
-        throw new ApiError(500 , "Something went worng while generating referesh and access token")
+        throw new ApiError(500, "Something went wrong while generating refresh and access tokens");
     }
-
-}
-
+};
 
 // {******------------------------ register user---------------------------******}
 
-const registerUser =  asyncHandler( async (req , res) =>{
-
-    const { name , email, password } = req.body
-    // console.log(name);
-    // console.log(req.headers);
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
         throw new ApiError(400, "All fields are required");
     }
 
-    const checkUser = await newUser.findOne(
-        {
-            $or: [{name} , {email}]
-        }
-    )
+    const checkUser = await newUser.findOne({
+        $or: [{ name }, { email }]
+    });
 
-    if(checkUser){
-        // return res.status(400).json({message: "User already exists" , data: null})
-        throw new ApiError(409, "User with email or username already exists")
+    if (checkUser) {
+        throw new ApiError(409, "User with email or username already exists");
     }
 
-    const avatar="https://res.cloudinary.com/drr9bsrar/image/upload/v1716498256/egt2sufg3qzyn1ofws9t.jpg"
-    
+    const avatar = "https://res.cloudinary.com/drr9bsrar/image/upload/v1716498256/egt2sufg3qzyn1ofws9t.jpg";
+
     const user = await newUser.create({
-        name ,
-        email , 
+        name,
+        email,
         password,
         avatar
-    })
-    // console.log(user);
-    
-    return res.status(201).json(new ApiResponse(200 , user ,"User created successfully"))
-    
-}) 
+    });
+
+    return res.status(201).json(new ApiResponse(200, user, "User created successfully"));
+});
 // {------------------------ register user---------------------------}
 
 // {*****------------------------ login user---------------------------******}
 
-const login  = asyncHandler(async (req , res) => {
-    
-    const {email , password } = req.body
-    // console.log(email);
+const login = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
 
-    if ( !email || !password) {
+    if (!email || !password) {
         throw new ApiError(400, "All fields are required");
     }
 
-    const userfind = await newUser.findOne({ email })
+    const userfind = await newUser.findOne({ email });
 
-    if ( !userfind ) {
-
-        throw new ApiError(404 , "User does not exist")
-        
+    if (!userfind) {
+        throw new ApiError(404, "User does not exist");
     }
 
-    const isPasswordValid = await userfind.isPasswordCorrect(password)
+    const isPasswordValid = await userfind.isPasswordCorrect(password);
 
-    if(!isPasswordValid){
-        throw new ApiError(400 , "Invalid password")
+    if (!isPasswordValid) {
+        throw new ApiError(400, "Invalid password");
     }
 
-    const { accessToken , refresehToken } =  await generateAccessAndRefereshTokens(user._id)
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(userfind._id);
 
-    const loggedInUser = await User.userfind(user._id).
-    select("-password -refreshToken")
+    const loggedInUser = await newUser.findById(userfind._id).select("-password -refreshToken");
 
     const options = {
-        httpOnly : true,
+        httpOnly: true,
         secure: true
-    }
-
+    };
 
     return res
-    .status(200)
-    .cookie("accessToken" , accessToken , options)
-    .cookie("refreshToken" , refresehToken , options)
-    .json(
-        new ApiResponse(
-            200, 
-            // userfind,
-            {
-                user: loggedInUser , accessToken , refresehToken
-            },
-            "User logged In Successfully"
-        )  
-    )
-})
+        .status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(new ApiResponse(200, { user: loggedInUser, accessToken, refreshToken }, "User logged in successfully"));
+});
 // {------------------------ login user---------------------------}
 
-
 // {**********-------------------logout user-------------------**********}
 
-const logoutUser = asyncHandler(async( req , res) => {
-
-    newUser.findByIdAndDelete(
-        req.user._id,
-        {
-            $set: {
-                refresehToken: undefined
-            }
-        },
-        {
-            new: true
+const logoutUser = asyncHandler(async (req, res) => {
+    await newUser.findByIdAndUpdate(req.user._id, {
+        $set: {
+            refreshToken: undefined
         }
-    )
+    });
 
-    
     const options = {
-        httpOnly : true,
+        httpOnly: true,
         secure: true
-    }
+    };
 
-    return res 
-    .status(200)
-    .clearCookie("accessToken" , options)
-    .clearCookie("refreshToken" , options)
-    .json(new ApiResponse(200 , {} , "User Logged Out"))
-
-})
-
-
-
+    return res
+        .status(200)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .json(new ApiResponse(200, {}, "User logged out"));
+});
 // {**********-------------------logout user-------------------**********}
+
 // {**********-------------------Update user-------------------**********}
-  const updateAccount = asyncHandler(async(req , res) => {
 
-    const {name , email , password} = req.body
-    console.log(name);
+const updateAccount = asyncHandler(async (req, res) => {
+    const { name, email, password } = req.body;
 
-    if (! name|| !email || !password) {
-        throw new ApiError(400, "All fields are required")
+    if (!name || !email || !password) {
+        throw new ApiError(400, "All fields are required");
     }
 
-    // console.log(req.files);
-    let avatarLocalPath;
     let avatarName;
     if (req.file) {
-        avatarLocalPath = req.file ? req.file.path : null; // Path to the uploaded file
-        avatarName  = await uploadOnCloudinary(avatarLocalPath)
+        const avatarLocalPath = req.file.path; // Path to the uploaded file
+        avatarName = await uploadOnCloudinary(avatarLocalPath);
     }
-
 
     const user = await newUser.findByIdAndUpdate(
         req.params.id,
         {
             $set: {
-                name: name,
-                email: email,
-                password: password,
-                avatar: avatarName.url // Save the avatar path to the database
+                name,
+                email,
+                password,
+                avatar: avatarName ? avatarName.url : undefined // Save the avatar path to the database if it exists
             }
         },
         { new: true }
     );
 
-    return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Account details updated successfully"))
-
-  })
-
-
+    return res.status(200).json(new ApiResponse(200, user, "Account details updated successfully"));
+});
 // {-----------------------------Update user-----------------------------}
-
-
 
 // {----------------------------Delete user-------------------------------}
 
-const deleteAccount = asyncHandler( async (req , res) => {
-
-    const user = await newUser.findByIdAndDelete(req.params.id)
+const deleteAccount = asyncHandler(async (req, res) => {
+    const user = await newUser.findByIdAndDelete(req.params.id);
 
     if (!user) {
-        throw new ApiError(404, "User not found")
+        throw new ApiError(404, "User not found");
     }
 
     res.status(200).json({
         success: true,
         message: "Account deleted successfully"
     });
-        
-})
-
-
-
+});
 // {----------------------------Delete user-------------------------------}
-
 
 export {
     registerUser,
@@ -220,4 +163,4 @@ export {
     updateAccount,
     deleteAccount,
     logoutUser
-}
+};
