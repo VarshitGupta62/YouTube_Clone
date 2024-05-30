@@ -10,7 +10,7 @@ function UploadVideo() {
       setIsModalOpen(!isModalOpen);
     };
 
-  const [time, setTime] = useState({ hours: '', minutes: '', seconds: '' });
+  // const [time, setTime] = useState({ hours: '', minutes: '', seconds: '' });
   const [title , setTitle] = useState("");
   const [description , setDescription] = useState("");
 
@@ -56,7 +56,7 @@ function UploadVideo() {
           <div className="relative p-4 w-full max-w-xl max-h-full bg-white rounded-lg shadow  ">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t  ">
               <h3 className="text-lg font-semibold text-gray-900  ">
-                Create New Video
+                Upload New Video
               </h3>
               <button 
                 type="button" 
@@ -95,7 +95,7 @@ function UploadVideo() {
                     // required 
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                <div className="col-span-2 ">
                   <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900  ">Video</label>
                   <input 
                     type="file" 
@@ -106,7 +106,7 @@ function UploadVideo() {
                     // required 
                   />
                 </div>
-                <div className="col-span-2 sm:col-span-1">
+                {/* <div className="col-span-2 sm:col-span-1">
                   <label htmlFor="duration" className="block mb-2 text-sm font-medium text-gray-900">Duration (hh:mm:ss)</label>
                   <div className="flex space-x-2">
                     <input
@@ -146,7 +146,7 @@ function UploadVideo() {
                       // required
                     />
                   </div>
-                </div>
+                </div> */}
                 
                 <div className="col-span-2">
                   <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900  ">Description</label>

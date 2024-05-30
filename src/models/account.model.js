@@ -1,4 +1,5 @@
 import mongoose, {Schema} from "mongoose";
+import jwt from "jsonwebtoken";
 
 
 const userSignUp = new Schema(
@@ -23,6 +24,15 @@ const userSignUp = new Schema(
         },
         avatar:{
             type:String
+        },
+        watchHistory:[
+            {
+                type : Schema.Types.ObjectId,
+                ref: "video"
+            }
+        ],
+        refreshToken:{
+            type: String
         }
     },
     {
@@ -36,6 +46,32 @@ userSignUp.methods.isPasswordCorrect = async function (password) {
     // In a real application, you should hash the input password and compare it to the stored hashed password
     return this.password === password;
 };
+
+userSignUp.methods.generateAccessToken = function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            email: this.email,
+            name: this.name
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+userSignUp.methods.generateRefreshToken = function(){
+    return jwt.sign(
+        {
+            _id: this._id,
+            
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    )
+}
 
 
 export const newUser = mongoose.model("newUser" , userSignUp)

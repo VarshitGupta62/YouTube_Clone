@@ -4,6 +4,25 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
+const generateAccessAndRefereshTokens = async(userId) => {
+
+    try {
+
+        const user = await user.findbyId(userId)
+        const accessToken = user.generateAccessToken
+        const refresehToken = user.generateRefreshToken
+
+        user.refresehToken = refresehToken
+        await user.save({validateBeforeSave: false})
+
+        return {accessToken , refresehToken}
+
+    } catch (error) {
+        throw new ApiError(500 , "Something went worng while generating referesh and access token")
+    }
+
+}
+
 
 // {******------------------------ register user---------------------------******}
 
@@ -28,7 +47,7 @@ const registerUser =  asyncHandler( async (req , res) =>{
         throw new ApiError(409, "User with email or username already exists")
     }
 
-    const avatar="https://res.cloudinary.com/drr9bsrar/image/upload/v1716446716/ov9ltesqzbscwy3njtmy.jpg"
+    const avatar="https://res.cloudinary.com/drr9bsrar/image/upload/v1716498256/egt2sufg3qzyn1ofws9t.jpg"
     
     const user = await newUser.create({
         name ,
@@ -68,19 +87,68 @@ const login  = asyncHandler(async (req , res) => {
         throw new ApiError(400 , "Invalid password")
     }
 
+    const { accessToken , refresehToken } =  await generateAccessAndRefereshTokens(user._id)
+
+    const loggedInUser = await User.userfind(user._id).
+    select("-password -refreshToken")
+
+    const options = {
+        httpOnly : true,
+        secure: true
+    }
+
 
     return res
     .status(200)
+    .cookie("accessToken" , accessToken , options)
+    .cookie("refreshToken" , refresehToken , options)
     .json(
         new ApiResponse(
             200, 
-            userfind,
+            // userfind,
+            {
+                user: loggedInUser , accessToken , refresehToken
+            },
             "User logged In Successfully"
-        )
+        )  
     )
 })
 // {------------------------ login user---------------------------}
 
+
+// {**********-------------------logout user-------------------**********}
+
+const logoutUser = asyncHandler(async( req , res) => {
+
+    newUser.findByIdAndDelete(
+        req.user._id,
+        {
+            $set: {
+                refresehToken: undefined
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+    
+    const options = {
+        httpOnly : true,
+        secure: true
+    }
+
+    return res 
+    .status(200)
+    .clearCookie("accessToken" , options)
+    .clearCookie("refreshToken" , options)
+    .json(new ApiResponse(200 , {} , "User Logged Out"))
+
+})
+
+
+
+// {**********-------------------logout user-------------------**********}
 // {**********-------------------Update user-------------------**********}
   const updateAccount = asyncHandler(async(req , res) => {
 
@@ -150,5 +218,6 @@ export {
     registerUser,
     login,
     updateAccount,
-    deleteAccount
+    deleteAccount,
+    logoutUser
 }
