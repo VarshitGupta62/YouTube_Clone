@@ -10,11 +10,11 @@ app.use(cors({
     credentials: true
 }))
 
+// app.use(bodyParser.json())
 app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
-// app.use(bodyParser.json())
 
 //routes import
 import userAccount from './routes/account.routes.js'
@@ -48,5 +48,16 @@ app.use("/api/v1/videos", videoRouter)
 
 // http://localhost:8000/api/v1/users/register
 
+// --------------------------------check any error--------------------------------
 
+// app.use((err, req, res, next) => {
+    //     console.error(err.stack);
+    //     res.status(err.status || 500).json({
+        //         error: {
+            //             message: err.message || "Internal Server Error",
+            //         },
+            //     });
+            // });
+            
+// --------------------------------check any error--------------------------------
 export { app }
