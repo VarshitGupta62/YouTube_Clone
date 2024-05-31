@@ -2,8 +2,11 @@ import { useState } from "react";
 import React  from 'react'
 import { Link , Outlet } from "react-router-dom";
 
-function YourChannel({userdata}) {
+function YourChannel() {
+  
+  console.log(userdata);
 
+  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long' };
     const date = new Date(dateString);
@@ -15,7 +18,6 @@ function YourChannel({userdata}) {
 
   
 
-  console.log(userdata);
   return (
     <>
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4  ">

@@ -14,6 +14,7 @@ import Shorts from "./Shorts";
 import Video from "./Video";
 import UploadVideo from "./UploadVideo";
 import AllVideo from "./AllVideo";
+import AuthLayout from "./AuthLayout";
 
 
 export {
@@ -33,7 +34,8 @@ export {
     Shorts,
     Video,
     UploadVideo,
-    AllVideo
+    AllVideo,
+    AuthLayout
 
 
 };

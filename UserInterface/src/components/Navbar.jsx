@@ -3,6 +3,8 @@ import React from 'react';
 import logo from '../assets/YouTube_Logo_2017.svg.png';
 import logo2 from '../assets/images.jpg';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/slice/authSlice.js';
 
 function Navbar({ openChange }) {
   const toggleSidebar = () => {
@@ -11,10 +13,20 @@ function Navbar({ openChange }) {
   };
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
+
+  const handleSignOut = () => {
+    // Handle sign-out logic here
+    dispatch(logout());
+    console.log("Sign out clicked");
+
+  };
+
+
 
   return (
     <>
@@ -121,7 +133,7 @@ function Navbar({ openChange }) {
                       </Link>
                     </li>
                     <li>
-                      <Link to={"/login"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                      <Link  onClick={handleSignOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                         Sign out
                       </Link>
                     </li>

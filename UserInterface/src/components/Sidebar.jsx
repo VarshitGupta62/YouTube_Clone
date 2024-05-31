@@ -1,13 +1,25 @@
  import React  from 'react';
  import { Link } from 'react-router-dom';
+ import { useSelector } from 'react-redux'
  
 
-function Sidebar({
+function Sidebar({ hidden }){
 
-    hidden
+    const authStatus = useSelector((state) => state.auth.status)
+    // console.log(authStatus);
 
-}){
-    console.log(hidden);
+    const navItems = [
+    
+        {
+            name: "Home",
+            path: "/",
+            svg: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>,
+            active: true
+        },
+    ]
+    // console.log(hidden);
     return (
     <>
     {/* {{ sidebar }} */}
@@ -20,14 +32,18 @@ function Sidebar({
                     <div className="flex flex-col flex-1 pt-3 pb-4 overflow-y-auto">
                         <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 ">
                             <ul className="">
-                            <li>
-                                <Link to={"/"} className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group ">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                                </svg>
-                                    <span className="ml-3" sidebar-toggle-item>Home</span>
-                                </Link>
-                            </li>
+                            {navItems.map((item , index) => 
+                                    item.active ?  (
+                                <li key={index} >
+                                        <Link to={item.path} className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group ">
+                                            {item.svg}
+                                            <span className="ml-3" sidebar-toggle-item>
+                                                {item.name}  
+                                            </span>
+                                        </Link>
+                                </li> ) 
+                            : null)}
+
                             <li>
                                 <Link to={"/shorts"} className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
