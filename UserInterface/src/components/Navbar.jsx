@@ -4,29 +4,28 @@ import logo from '../assets/YouTube_Logo_2017.svg.png';
 import logo2 from '../assets/images.jpg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../store/slice/authSlice.js';
+import { logout } from '../store/slice/authSlice';
+import { useSelector } from 'react-redux';
 
 function Navbar({ openChange }) {
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dispatch = useDispatch();
+
   const toggleSidebar = () => {
     console.log("Sidebar toggle triggered");
     openChange();
   };
-
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const dispatch = useDispatch();
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
   const handleSignOut = () => {
-    // Handle sign-out logic here
     dispatch(logout());
     console.log("Sign out clicked");
-
   };
 
-
+  const authStatus = useSelector((state) => state.auth.status);
 
   return (
     <>
@@ -34,7 +33,6 @@ function Navbar({ openChange }) {
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
-              {/* Button to toggle sidebar */}
               <button
                 onClick={toggleSidebar}
                 className="fixed top-1 lg:top-2 left-3 z-40 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md hover:bg-gray-100 group"
@@ -55,13 +53,13 @@ function Navbar({ openChange }) {
                 </svg>
               </button>
 
-              <a className="flex ml-14 md:mr-24">
+              <a className="flex ml-14 md:mr-24" href="/">
                 <img src={logo} className="mr-2.5 h-6" alt="YouTube Logo" />
               </a>
 
               <form
                 action="#"
-                method=""
+                method="get"
                 className="hidden lg:block lg:pl-3.5"
                 style={{ marginLeft: 300 }}
               >
@@ -96,51 +94,49 @@ function Navbar({ openChange }) {
             </div>
 
             {/* Profile dropdown */}
-            <div className="relative ml-auto lg:ml-4">
-              <button
-                type="button"
-                className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
-                id="user-menu-button-2"
-                aria-expanded={dropdownVisible}
-                onClick={toggleDropdown}
-              >
-                <span className="sr-only">Open user menu</span>
-                <img
-                  className="w-8 h-8 rounded-full"
-                  src={logo2}
-                  alt="User"
-                />
-              </button>
-              {dropdownVisible && (
-                <div className="absolute right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg" id="dropdown-2">
-                  <div className="px-4 py-3" role="none">
-                    <p className="text-sm text-gray-900" role="none">
-                      Varshit Gupta
-                    </p>
-                    <p className="text-sm font-medium text-gray-900 truncate" role="none">
-                       varshitgupta45@gmail.com
-                    </p>
+            {authStatus && (
+              <div className="relative ml-auto lg:ml-4">
+                <button
+                  type="button"
+                  className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
+                  id="user-menu-button-2"
+                  aria-expanded={dropdownVisible}
+                  onClick={toggleDropdown}
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src={logo2}
+                    alt="User"
+                  />
+                </button>
+                {dropdownVisible && (
+                  <div className="absolute right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg" id="dropdown-2">
+                    <div className="px-4 py-3">
+                      <p className="text-sm text-gray-900">Varshit Gupta</p>
+                      <p className="text-sm font-medium text-gray-900 truncate">varshitgupta45@gmail.com</p>
+                    </div>
+                    <ul className="py-1">
+                      <li>
+                        <Link to="/your_channel" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Dashboard
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Settings
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={handleSignOut} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Sign out
+                        </button>
+                      </li>
+                    </ul>
                   </div>
-                  <ul className="py-1" role="none">
-                    <li>
-                      <Link to={"/your_channel"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                        Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to={"/settings"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                        Settings
-                      </Link>
-                    </li>
-                    <li>
-                      <Link  onClick={handleSignOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
-                        Sign out
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>
