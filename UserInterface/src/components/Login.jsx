@@ -20,13 +20,16 @@ function  Login({setUser}) {
                 password : password
             })
 
-            console.log('login successful:', res.data);
-            setUser(res.data);
-            console.log(res.data);
+            // console.log('Full response:', res);
+            // console.log('Response data:', res.data.data.user._id);
+
+            console.log('login successful:', res.data.data.user);
+            
+            setUser(res.data.data.user);
             alert("login successful");
             history('/your_channel');
 
-
+             
             
         } catch (error) {
 

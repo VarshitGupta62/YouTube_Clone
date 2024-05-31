@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 function CustomizeChannel({ userdata }) {
   const history = useNavigate();
 
-  const [file, setFile] = useState(userdata.avatar);
+  const [file, setFile] = useState('');
   const [name, setName] = useState(userdata.name.toUpperCase());
   const [email, setEmail] = useState(userdata.email);
   const [password, setPassword] = useState(userdata.password);
 
-  console.log(userdata);
+  // console.log(userdata);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -25,15 +25,17 @@ function CustomizeChannel({ userdata }) {
     // console.log(password);
     // console.log(file);
 
-    const formData = {
-      name: name,
-      email: email,
-      password: password,
-      avatar: file
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    if (file) {
+      formData.append('avatar', file);
     }
 
-    console.log(formData);
-
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
     
     try {
       const res = await axios.put(`/api/v1/account/update/${userdata._id}`, formData ,
@@ -72,7 +74,7 @@ function CustomizeChannel({ userdata }) {
 
           <label htmlFor="avatar" className="block mb-1 text-sm font-medium text-gray-900">Avatar</label>
           <p id="helper-text-explanation" className="mb-3 text-sm text-gray-500">It’s recommended to use a picture that’s at least 98 x 98 pixels and 4MB or less. Use a PNG or GIF (no animations) file. Make sure your picture follows the YouTube Community Guidelines. </p>
-          <input type="file" name='avatar' id="avatar"  onChange={handleFileChange} className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  required/>
+          <input type="file" name='avatar' id="avatar"  onChange={handleFileChange} className="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  />
 
           <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900">Password</label>
           <p id="helper-text-explanation" className="mb-3 text-sm text-gray-500">Ensure email security by using strong, unique passwords and enabling two-factor authentication to safeguard against unauthorized access and data breaches.</p>

@@ -73,7 +73,7 @@ const login = asyncHandler(async (req, res) => {
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(userfind._id);
 
-    const loggedInUser = await newUser.findById(userfind._id).select("-password -refreshToken");
+    const loggedInUser = await newUser.findById(userfind._id).select("-refreshToken");
 
     const options = {
         httpOnly: true,
@@ -180,18 +180,22 @@ const updateAccount = asyncHandler(async (req, res) => {
         avatarName = await uploadOnCloudinary(avatarLocalPath);
     }
 
+    const updateData = {
+        name,
+        email,
+        password,
+    };
+
+    if (avatarName) {
+        updateData.avatar = avatarName.url; // Save the avatar path to the database if it exists
+    }
+
     const user = await newUser.findByIdAndUpdate(
         req.params.id,
-        {
-            $set: {
-                name,
-                email,
-                password,
-                avatar: avatarName ? avatarName.url : undefined // Save the avatar path to the database if it exists
-            }
-        },
+        { $set: updateData },
         { new: true }
     );
+
 
     return res.status(200).json(new ApiResponse(200, user, "Account details updated successfully"));
 });
