@@ -25,7 +25,8 @@ function Login() {
             // navigate('/your_channel');
             navigate('/');
         } catch (err) {
-            setError(err.message || 'An error occurred.');
+            alert("Something went worng !")
+            // setError(err.message || 'An error occurred.');
         }
     };
 

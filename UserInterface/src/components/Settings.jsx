@@ -2,8 +2,11 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import img from "../assets/gde-najti-ssylku-na-svoj-kanal-youtube.jpg"
 import axios from 'axios'
+import { useSelector } from 'react-redux';
 
-function Settings({userdata}) {
+function Settings() {
+
+    const userdata = useSelector((state) => state.auth.user);
 
     const history = useNavigate()
 

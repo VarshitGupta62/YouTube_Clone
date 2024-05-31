@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function CustomizeChannel({ userdata }) {
+function CustomizeChannel() {
+
+  const userdata = useSelector((state) => state.auth.user);
   const history = useNavigate();
 
   const [file, setFile] = useState('');
