@@ -26,6 +26,7 @@ function Navbar({ openChange }) {
   };
 
   const authStatus = useSelector((state) => state.auth.status);
+  const userdata = useSelector((state) => state.auth.user);
 
   return (
     <>
@@ -106,15 +107,17 @@ function Navbar({ openChange }) {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src={logo2}
+                    src={userdata.avatar}
                     alt="User"
                   />
                 </button>
                 {dropdownVisible && (
                   <div className="absolute right-0 z-50 mt-2 w-48 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg" id="dropdown-2">
                     <div className="px-4 py-3">
-                      <p className="text-sm text-gray-900">Varshit Gupta</p>
-                      <p className="text-sm font-medium text-gray-900 truncate">varshitgupta45@gmail.com</p>
+                      <p className="text-sm text-gray-900">
+                        {userdata.name}
+                      </p>
+                      <p className="text-sm font-medium text-gray-900 truncate"> {userdata.email}</p>
                     </div>
                     <ul className="py-1">
                       <li>

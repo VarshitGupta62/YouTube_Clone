@@ -3,13 +3,13 @@ import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
 const  videoSchema = new Schema(
     {
-        video:{
+        videoFile:{
             type: String,
-            // required: true
+            required: true
         },
-        thumbnaile:{
+        thumbnail:{
             type: String,
-            // required: true
+            required: true
         },
         title:{
             type: String,
@@ -30,7 +30,8 @@ const  videoSchema = new Schema(
         },
         owner: {
             type: Schema.Types.ObjectId,
-            ref: "newUser"
+            ref: "newUser",
+            required: true
         }
 
     },

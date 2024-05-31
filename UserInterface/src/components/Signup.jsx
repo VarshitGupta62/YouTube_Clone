@@ -54,7 +54,7 @@ function Signup() {
                 </h2>
                 <form onSubmit={handleFormSubmit} className="mt-8 space-y-6">
                     <div>
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Your Name</label>
+                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
                         <input
                             type="text"
                             name="name"
