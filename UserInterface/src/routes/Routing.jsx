@@ -15,9 +15,9 @@ function Routing() {
         <Route path='/' element={<App />}>
          
           <Route index element={  
-            <AuthLayout>
+            // <AuthLayout>
               <Home />
-            </AuthLayout>
+            // </AuthLayout>
           } />
          
 
@@ -26,7 +26,11 @@ function Routing() {
             <Route path='upload_video' element={< UploadVideo />} />
           </Route>
 
-          <Route path='history' element={ <History />} />
+          <Route path='history' element={ 
+             <AuthLayout>
+                <History />
+             </AuthLayout>
+          } />
           <Route path='playlist' element={ <Playlist />} />
           <Route path='like' element={  <Like /> } />
           <Route path='subscriptions' element={<Home />} />
