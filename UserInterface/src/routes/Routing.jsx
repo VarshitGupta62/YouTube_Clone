@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../store/store.js';
 import App from '../App';
-import { Home, YourChannel, History, Playlist, Like, CustomizeChannel, Signup, Login, Settings, Shorts, Video, UploadVideo, AllVideo, AuthLayout } from '../components';
+import { Home, YourChannel, History, Playlist, Like, CustomizeChannel, Signup, Login, Settings, Shorts, Video, UploadVideo, AllVideo, AuthLayout , Main } from '../components';
 
 function Routing() {
     return (
@@ -12,7 +12,12 @@ function Routing() {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<App />}>
-                        <Route index element={<Home />} />
+                        <Route index element={<Main />} />
+                        <Route  path='home' element={
+                         <AuthLayout>
+                            <Home />
+                         </AuthLayout>
+                        } />
 
                         <Route path='your_channel/*' element={
                             <AuthLayout>
@@ -38,7 +43,7 @@ function Routing() {
                         } />
                         <Route path='playlist' element={
                             <AuthLayout>
-                                <Playlist />
+                                < Main />
                             </AuthLayout>
                         } />
                         <Route path='like' element={

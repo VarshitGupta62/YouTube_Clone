@@ -27,7 +27,7 @@ function Login() {
             setLoader(false);
             // alert("login successful");
             // navigate('/your_channel');
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             alert("Please check your email and password !")
             setLoader(false)

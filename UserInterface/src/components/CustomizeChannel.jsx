@@ -61,7 +61,7 @@ function CustomizeChannel() {
   };
 
   const handleCancel = () => {
-    history("/");
+    history("/your_channel");
   };
 
   return (
