@@ -43,9 +43,9 @@ function Home() {
                         </h3>
                       </div>
                       <div className="mt-2">
-                        <ul>
+                        {/* <ul>
                           <li className="text-sm">Duration: {video.duration} mins</li>
-                        </ul>
+                        </ul> */}
                       </div>
                     </div>
                   </div>

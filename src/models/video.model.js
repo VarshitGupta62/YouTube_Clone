@@ -41,6 +41,13 @@ const  videoSchema = new Schema(
 
 )
 
+// Method to increment views
+videoSchema.methods.incrementViews = async function () {
+    this.views++;
+    await this.save();
+  };
+
 videoSchema.plugin(mongooseAggregatePaginate)
+
 
 export const Video = mongoose.model("Video" , videoSchema)
