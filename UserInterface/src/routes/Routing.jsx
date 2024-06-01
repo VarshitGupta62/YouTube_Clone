@@ -56,7 +56,7 @@ function Routing() {
                                 <Shorts />
                             </AuthLayout>
                         } />
-                        <Route path='watch' element={
+                        <Route path='watch/:id' element={
                             <AuthLayout>
                                 <Video />
                             </AuthLayout>
