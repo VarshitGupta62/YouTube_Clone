@@ -216,6 +216,24 @@ const deleteAccount = asyncHandler(async (req, res) => {
     });
 });
 // {----------------------------Delete user-------------------------------}
+// {----------------------------User Data By Id-------------------------------}
+
+const getUserById = asyncHandler(async (req, res) => {
+
+    const userId = req.params.id;
+    // console.log(userId);
+
+    const user = await newUser.findById(userId);
+
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    res.status(200).json(new ApiResponse(200, user, "User data retrieved successfully"));
+
+})
+
+// {----------------------------User Data By Id-------------------------------}
 
 export {
     registerUser,
@@ -223,5 +241,6 @@ export {
     updateAccount,
     deleteAccount,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    getUserById
 };
