@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+// user all videos
+
 function AllVideo() {
   const userdata = useSelector((state) => state.auth.user);
   const [videos, setVideos] = useState([]);

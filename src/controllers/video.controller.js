@@ -105,13 +105,30 @@ const deleteVideoById = asyncHandler(async(req , res) =>{
 
 })
 
-
-
 // ********------------------delete video by id-------------------********
 
+// ********------------------video data by id-------------------********
+
+const VideoDataById = asyncHandler(async(req , res) =>{
+
+    const { id } = req.params; // Extract the video ID from the request parameters
+
+    const video = await Video.findById(id); // Find the video by ID
+
+    if (!video) {
+        throw new ApiError(404, "Video not found");
+    }
+
+    return res.status(200).json(new ApiResponse(200, video, "Video fetched successfully"));
+
+})
+
+
+// ********------------------video data by id-------------------********
 export {
      publishAVideo,
      getAllVideos,
      getAllUserVideos,
-     deleteVideoById
+     deleteVideoById,
+     VideoDataById
      };

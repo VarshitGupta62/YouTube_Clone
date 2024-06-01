@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { publishAVideo , getAllVideos , getAllUserVideos , deleteVideoById } from "../controllers/video.controller.js";
+import { publishAVideo , getAllVideos , getAllUserVideos , deleteVideoById , VideoDataById } from "../controllers/video.controller.js";
 import { upload } from "../middlewares/multer.middleware.js"
 import {verifyJWT} from "../middlewares/auth.middleware.js"
 
@@ -19,5 +19,6 @@ router.route("/publish").post(videoUpload , publishAVideo )
 router.route("/allVideo").get(getAllVideos)
 router.route("/allUserVideo/:owner").get(getAllUserVideos)
 router.route("/delete/:id").delete(deleteVideoById)
+router.route("/videoData/:id").get(VideoDataById)
 
 export default router
