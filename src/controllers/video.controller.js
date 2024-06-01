@@ -7,6 +7,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 // ********------------------video upload-------------------********
 
 const publishAVideo = asyncHandler(async (req, res) => {
+
+    // console.log('Request Body:', req.body);
+    // console.log('Request Files:', req.files);
     
     const { title, description } = req.body;
     const thumbnailFile = req.files?.thumbnail?.[0];
