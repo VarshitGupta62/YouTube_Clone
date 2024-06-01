@@ -44,7 +44,7 @@ function YourChannel() {
           <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500">
             <li className="me-2">
               <Link
-                to={"all_video"}
+                to={""}
                 className="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 "
               >
                 <svg

@@ -30,7 +30,10 @@ function Home() {
                   <div key={video._id}>
                     <div className="relative">
                       <Link to={`/watch/${video._id}`}>
-                        <img src={video.thumbnail} alt={video.title} className="w-full h-auto" />
+                        <img src={video.thumbnail} alt={video.title} 
+                        // className="w-full h-auto" 
+                        className="w-72 h-40" 
+                        />
                       </Link>
                     </div>
                     <div className="mt-2 md:mt-0">
