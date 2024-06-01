@@ -45,18 +45,18 @@ function AllVideo() {
                 <div key={video._id}>
                   <div className="relative">
                     <Link to={`/watch/${video._id}`}>
-                      <img src={video.thumbnail} alt={video.title} className="w-64 h-36" />
+                      <img src={video.thumbnail} alt={video.title} className="w-80 h-40"  />
                     </Link>
                   </div>
                   <div className="mt-2 md:mt-0">
                     <div>
-                      <h3 className="text-lg font-bold">
+                      <h3 className="text-lg font-bold truncate">
                         <Link to={`/watch/${video._id}`}>{video.title}</Link>
                       </h3>
                     </div>
                     <div className="mt-2">
                       <ul className="flex items-center space-x-2">
-                        <li className="text-sm">Duration: {video.duration} mins</li>
+                        {/* <li className="text-sm">Duration: {video.duration} mins</li> */}
                         <button
                           type="button"
                           className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center mt-5 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
@@ -67,9 +67,9 @@ function AllVideo() {
                           </svg>
                         </button>
                       </ul>
-                      <ul>
+                      {/* <ul>
                         <li className="text-sm">Views: {video.views}</li>
-                      </ul>
+                      </ul> */}
                     </div>
                   </div>
                 </div>

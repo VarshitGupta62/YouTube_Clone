@@ -32,13 +32,13 @@ function Home() {
                       <Link to={`/watch/${video._id}`}>
                         <img src={video.thumbnail} alt={video.title} 
                         // className="w-full h-auto" 
-                        className="w-72 h-40" 
+                        className="w-80 h-40" 
                         />
                       </Link>
                     </div>
                     <div className="mt-2 md:mt-0">
                       <div>
-                        <h3 className="text-lg font-bold">
+                        <h3 className="text-lg font-bold truncate">
                           <Link to={`/watch/${video._id}`}>{video.title}</Link>
                         </h3>
                       </div>
