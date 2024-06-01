@@ -235,6 +235,20 @@ const getUserById = asyncHandler(async (req, res) => {
 
 // {----------------------------User Data By Id-------------------------------}
 
+// {----------------------------Watch History---------------------------------}
+const GetWatchHistory = asyncHandler(async (req , res) =>{
+
+    const user = await newUser.aggregate([
+        {
+            
+        }
+    ])
+
+})
+
+
+// {----------------------------Watch History---------------------------------}
+
 export {
     registerUser,
     login,
@@ -242,5 +256,6 @@ export {
     deleteAccount,
     logoutUser,
     refreshAccessToken,
-    getUserById
+    getUserById,
+    GetWatchHistory
 };

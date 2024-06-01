@@ -11,6 +11,6 @@ router.route("/logout").post(verifyJWT ,  logoutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/delete/:id").delete(deleteAccount)
 router.route("/update/:id").put(upload.single("avatar") , updateAccount );
-router.route("/userData/:id").get( getUserById)
+router.route("/userData/:id").get(getUserById)
 
 export default router
