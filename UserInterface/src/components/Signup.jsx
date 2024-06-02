@@ -67,7 +67,7 @@ function Signup() {
             </a>
             <div className="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow ">
                 <h2 className="text-2xl font-bold text-gray-900 ">
-                    Create a Google Account
+                    Create a New Account
                 </h2>
                 <form onSubmit={handleFormSubmit} className="mt-8 space-y-6">
                     <div>
