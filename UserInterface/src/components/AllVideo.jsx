@@ -19,6 +19,7 @@ function AllVideo() {
         setLoader(false)
       } catch (error) {
         console.error('Error fetching videos:', error);
+        setLoader(false)
       }
     };
 

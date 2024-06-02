@@ -97,10 +97,10 @@ function Video() {
 
                   <div>
                     <div className="border-b border-b-gray-100">
-                      <ul className="-mb-px flex items-center gap-5 text-lg font-sm">
+                      <ul className="-mb-px flex items-center gap-5 text-sm font-sm">
                         <li>
                           {userData ? (
-                            <Link className="inline-flex cursor-pointer items-center gap-2 px-1 py-3 text-black hover:text-gray-700 ">
+                            <Link className="inline-flex cursor-pointer items-center gap-3 px-1 py-3 text-black hover:text-gray-700 ">
                               <img
                                 className="w-12 h-12 rounded-full"
                                 src={userData.avatar}

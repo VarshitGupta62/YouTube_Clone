@@ -11,7 +11,7 @@ function Main() {
         </svg>
         <span class="sr-only">Info</span>
         <div>
-        <span class="font-medium">Login alert!</span> Please login your account and try again.
+        <span class="font-medium">Login alert!</span> Please login your account and share your video.
         </div>
         </div>
       {/*-------------------content---------------------  */}

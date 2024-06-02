@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
 import logo from '../assets/YouTube_Logo_2017.svg.png';
-import logo2 from '../assets/images.jpg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/slice/authSlice';

@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import React  from 'react'
 import { Link , Outlet } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import axios from "axios";
 
 function YourChannel() {
 
-  const userdata = useSelector((state) => state.auth.user);
-  // console.log(userdata);
+  
+  const  data = useSelector((state) => state.auth.user);
+  // console.log(data._id);
 
+  const [userdata , setUserData]  = useState();
+  
+  useEffect(() => {
+      if (data._id) {
+          const fetchUser = async () => {
+              try {
+                  const response = await axios.get(`/api/v1/account/userData/${data._id}`);
+                  setUserData(response.data.data);
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                  }
+                };
+            
+                fetchUser();
+              }
+    }, []);
+            
+    // console.log(userdata);
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long' };
@@ -28,14 +48,24 @@ function YourChannel() {
         {/* <div className='mb-4' >YourChannel</div> */}
         {/* <hr /> */}
         <div class="mt-4 flex items-center gap-5">
-            <img class="w-28 h-28 rounded-full" src={userdata.avatar} alt="not found"/>
-            <div class="font-bold dark:text-black">
+           
+            {userdata ? (
+
+            <>
+              <img class="w-28 h-28 rounded-full" src={userdata.avatar} alt="not found"/>
+              <div class="font-bold dark:text-black">
                 <div className='text-lg' >{(userdata.name || "Admin").toUpperCase()}</div>
                 <div class="text-sm mb-3 text-gray-500  ">Joined in {formatDate(userdata.createdAt)}</div>
                 <Link to={"/customize_channel"}>
                 <button type="button" className=" text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-2.5 py-2.5 me-2 ">Customize channel</button>
                 </Link>
             </div>
+            </>
+              
+            ) : (
+              <div>Loading user data...</div>
+            )}
+            
         </div>
         {/* --------------------------------tab-------------------------------- */}
         
