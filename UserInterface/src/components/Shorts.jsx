@@ -6,7 +6,7 @@ function Shorts() {
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4">
       <div className="mb-4 col-span-full xl:mb-2">
         {/*-------------------content---------------------*/}
-        <div className='mb-8'>Shorts</div>
+        <div className=' mb-7 text-3xl font-black text-gray-900'>Shorts</div>
         <div className="bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4" role="alert">
       <div className="flex">
         <div className="flex-shrink-0">
