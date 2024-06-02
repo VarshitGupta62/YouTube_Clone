@@ -43,7 +43,7 @@ function Routing() {
                         } />
                         <Route path='playlist' element={
                             <AuthLayout>
-                                < Main />
+                                <  Playlist />
                             </AuthLayout>
                         } />
                         <Route path='like' element={
