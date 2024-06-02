@@ -1,9 +1,11 @@
 import { newUser } from "../models/account.model.js";
+import { Video } from "../models/video.model.js"
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken"
+import mongoose from "mongoose";
 
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
@@ -240,14 +242,86 @@ const GetWatchHistory = asyncHandler(async (req , res) =>{
 
     const user = await newUser.aggregate([
         {
-            
+            $match: {
+                _id: new mongoose.Types.ObjectId(req.user._id)
+            }
+        },
+        {
+            $lookup: {
+                from: "videos",
+                localField: "watchHistory",
+                foreignField: "_id",
+                as: "watchHistory",
+                pipeline: [
+                    {
+                        $lookup: {
+                            from: "newusers",
+                            localField: "owner",
+                            foreignField: "_id",
+                            as: "owner",
+                            pipeline: [
+                                {
+                                    $project: {
+                                        name: 1,
+                                        avatar: 1
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        $addFields:{
+                            owner:{
+                                $first: "$owner"
+                            }
+                        }
+                    }
+                ]
+            }
         }
     ])
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            user[0].watchHistory,
+            "Watch history fetched successfully"
+        )
+    )
 
 })
 
 
-// {----------------------------Watch History---------------------------------}
+// {----------------------------Add Watch History---------------------------------}
+
+const addToWatchHistory = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+    const { videoId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(videoId)) {
+        throw new ApiError(400, "Invalid video ID");
+    }
+
+    const video = await Video.findById(videoId);
+    if (!video) {
+        throw new ApiError(404, "Video not found");
+    }
+
+    const user = await newUser.findById(userId);
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    // Add the video to the watch history
+    if (!user.watchHistory.includes(videoId)) {
+        user.watchHistory.push(videoId);
+        await user.save();
+    }
+
+    return res.status(200).json(new ApiResponse(200, user.watchHistory, "Video added to watch history successfully"));
+});
 
 export {
     registerUser,
@@ -257,5 +331,6 @@ export {
     logoutUser,
     refreshAccessToken,
     getUserById,
-    GetWatchHistory
+    GetWatchHistory,
+    addToWatchHistory
 };
