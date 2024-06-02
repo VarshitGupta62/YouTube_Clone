@@ -13,6 +13,6 @@ router.route("/delete/:id").delete(deleteAccount)
 router.route("/update/:id").put(upload.single("avatar") , updateAccount );
 router.route("/userData/:id").get(getUserById)
 router.route("/history").get(verifyJWT , GetWatchHistory)
-router.route("/addToHistory").post(verifyJWT , addToWatchHistory)
+router.route("/addToHistory/:id").put(verifyJWT , addToWatchHistory)
 
 export default router

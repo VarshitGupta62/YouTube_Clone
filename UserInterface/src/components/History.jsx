@@ -10,7 +10,7 @@ function History() {
     const fetchHistory = async () => {
       try {
         const response = await axios.get('/api/v1/account/history');
-        setHistory(response.data); // Assuming response.data contains the history array
+        setHistory(response.data.data); // Assuming response.data contains the history array
       } catch (error) {
         console.error('Error fetching history:', error);
       } finally {
@@ -20,6 +20,16 @@ function History() {
 
     fetchHistory();
   }, []); // Empty dependency array to run the effect only once
+
+  //  console.log(history[0]._id);
+
+  //  if (history.data[0]) {
+
+  //   console.log("data is not");
+    
+  //  }else{
+  //   console.log("data is");
+  //  }
 
   return (
     <div className="lg:mt-8 bg-white grid grid-cols-1 px-8 pt-6 xl:grid-cols-3 xl:gap-4">
@@ -55,11 +65,11 @@ function History() {
         ) : (
           <div>
             {/* ----------------------content--------------------------- */}
-            {history.data ? (
+            { history.length > 0  ? (
               <section>
               <div className="container">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {history.data.map((video) => (
+                  {history.map((video) => (
                     <div key={video._id}>
                       <div className="relative">
                         <Link to={`/watch/${video._id}`}>
@@ -90,17 +100,7 @@ function History() {
               <div>No history available</div>
             )}
             
-            {/* {history.data ? (
-              <ul>
-                {history.data.map((item, index) => (
-                  <li key={index}>
-                    {item.title}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div>No history available</div>
-            )} */}
+            {/* <div>No history available</div> */}
           </div>
         )}
         {/* ----------------------content--------------------------- */}

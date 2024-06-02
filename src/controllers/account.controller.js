@@ -298,13 +298,13 @@ const GetWatchHistory = asyncHandler(async (req , res) =>{
 
 const addToWatchHistory = asyncHandler(async (req, res) => {
     const userId = req.user._id;
-    const { videoId } = req.body;
+    const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(videoId)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
         throw new ApiError(400, "Invalid video ID");
     }
 
-    const video = await Video.findById(videoId);
+    const video = await Video.findById(id);
     if (!video) {
         throw new ApiError(404, "Video not found");
     }
@@ -315,8 +315,8 @@ const addToWatchHistory = asyncHandler(async (req, res) => {
     }
 
     // Add the video to the watch history
-    if (!user.watchHistory.includes(videoId)) {
-        user.watchHistory.push(videoId);
+    if (!user.watchHistory.includes(id)) {
+        user.watchHistory.push(id);
         await user.save();
     }
 

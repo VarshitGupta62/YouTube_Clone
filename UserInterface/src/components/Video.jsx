@@ -44,6 +44,18 @@ function Video() {
   }, [id]);
 
   useEffect(() => {
+    const addToWatchHistory = async () => {
+      try {
+        await axios.put(`/api/v1/account/addToHistory/${id}`);
+        console.log('addToWatchHistory');
+      } catch (error) {
+        console.error('Error addToWatchHistory:', error);
+      }
+    };
+    addToWatchHistory();
+  }, [id]);
+
+  useEffect(() => {
     if (videoData && videoData.owner) {
       const fetchUser = async () => {
         try {
