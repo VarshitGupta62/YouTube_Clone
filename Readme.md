@@ -46,7 +46,6 @@ This project is a full-stack YouTube clone built with the MERN stack (MongoDB, E
 
 ![alt text](<public/assetGitHub/Screenshot 2024-06-05 005407.png>)
 
-## Installation
 
 ## Features
 
