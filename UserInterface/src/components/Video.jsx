@@ -92,18 +92,19 @@ function Video() {
           <div className="container mx-auto">
             <div className="row">
               <div className="col-lg-9 col-xl-9">
-                <section>
-                  <div className="row">
-                    <div className="col">
-                      <div className="relative video-wrap">  
-                        <video style={{height:"465px"}} className="w-full " controls>
-                          <source src={videoData.videoFile} type="video/mp4"/>
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
+              <section>
+                <div className="row">
+                  <div className="col">
+                    <div className="relative video-wrap" style={{ height: "465px" }}>
+                      <video className=" w-full h-full" controls>
+                        <source src={videoData.videoFile} type="video/mp4"/>
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
                   </div>
-                </section>
+                </div>
+              </section>
+
                 <div className="mt-4">
                   <h1 className="mb-3 text-xl truncate">{videoData.title}</h1>
 
@@ -130,7 +131,7 @@ function Video() {
                               <path fillRule="evenodd" d="M10 2a6 6 0 00-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 00.515 1.076 32.91 32.91 0 003.256.508 3.5 3.5 0 006.972 0 32.903 32.903 0 003.256-.508.75.75 0 00.515-1.076A11.448 11.448 0 0116 8a6 6 0 00-6-6zM8.05 14.943a33.54 33.54 0 003.9 0 2 2 0 01-3.9 0z" clipRule="evenodd" />
                             </svg>
                             Subscribe
-                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600"> 8 </span>
+                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600"> 303k </span>
                           </Link>
                         </li>
                         <li>
@@ -138,7 +139,7 @@ function Video() {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
                             </svg>
-                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600"> 8 </span>
+                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600"> 30k </span>
                           </Link>
                         </li>
                         <li>

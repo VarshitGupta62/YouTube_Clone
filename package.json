@@ -5,7 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "frontend": "cd UserInterface && npm run dev",
+    "backend": "nodemon src/index.js",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "keywords": [
     "javascript",
@@ -20,6 +22,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cloudinary": "^2.2.0",
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
