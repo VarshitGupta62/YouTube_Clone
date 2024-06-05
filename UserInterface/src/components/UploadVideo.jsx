@@ -48,6 +48,7 @@ function UploadVideo() {
         } catch (error) {
             console.log("Video Upload error: ", error);
             alert(" Something went worng ?");
+            setLoader(false)
         }
     };
 

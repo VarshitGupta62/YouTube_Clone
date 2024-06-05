@@ -1,22 +1,14 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import dotenv from "dotenv";
 
-// Check if the Cloudinary API key is available
-// if (!process.env.CLOUDINARY_API_KEY) {
-//     throw new Error("Cloudinary API key is missing. Please ensure the CLOUDINARY_API_KEY environment variable is set.");
-// }
-// import {v2 as cloudinary} from 'cloudinary';
-          
+dotenv.config();
+
 cloudinary.config({ 
-  cloud_name: 'drr9bsrar', 
-  api_key: '642756139658148', 
-  api_secret: 'tzD7LV-I8e3O-Z-OX96-m2QZSKY' 
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET 
 });
-// cloudinary.config({ 
-//     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-//     api_key: process.env.CLOUDINARY_API_KEY, 
-//     api_secret: process.env.CLOUDINARY_API_SECRET 
-// });
 
 const uploadOnCloudinary = async (localFilePath) => {
     try {
