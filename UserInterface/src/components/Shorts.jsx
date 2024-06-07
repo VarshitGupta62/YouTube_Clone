@@ -29,7 +29,7 @@ function Shorts() {
         </div>
         <div className="ms-4">
           <h3 className="text-sm font-semibold">
-            Cannot access this page
+            Cannot access this page.
           </h3>
           <div className="mt-1 text-sm text-yellow-700">
            The page is currently under maintenance.
